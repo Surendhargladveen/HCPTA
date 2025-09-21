@@ -1,0 +1,10 @@
+resource "aws_iam_user" "username" {
+    name = var.list[count.index]
+    count = 3
+}
+
+
+variable "list" {
+    type = list(string)
+    default = ["surey","melvin","rahul"]
+}

@@ -1,0 +1,30 @@
+variable "sg-ports" {
+    type = list(number)
+    default = [22, 80, 443, 81, 9300] // here we provide a list of ports to allow in the security group
+    description = "List of ports to allow in the security group"
+}
+
+resource "aws_security_group" "My-SG" {
+    name = "My-SG"
+    description = "My security group"
+
+    dynamic "ingress"  {
+      for_each = var.sg-ports
+        content {
+          from_port = ingress.value // ingress which takes from dynamic block. value is the current element of the iteration, it tooks the value of the current port
+          to_port =  ingress.value
+            protocol = "tcp"
+            cidr_blocks = ["0.0.0.0/0"]
+        }
+    }
+    dynamic "egress"  {
+      for_each = var.sg-ports
+        content {
+          from_port = egress.value // egress which takes from dynamic block. value is the current element of the iteration, it tooks the value of the current port
+          to_port =  egress.value
+            protocol = "tcp"
+            cidr_blocks = ["0.0.0.0/0"]
+        }
+    }
+}
+

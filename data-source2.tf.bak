@@ -1,0 +1,22 @@
+resource "aws_instance" "fetch_ami" {
+  ami           = data.aws_ami.amazon_os.id
+  instance_type = "t2.medium"
+  key_name      = "gladveen"
+
+  tags = {
+    Name = "Fetch AMI"
+  }
+}
+
+data "aws_ami" "amazon_os" {
+    most_recent = true
+    owners = ["amazon"] // Here we have to specify the owner of the AMI. Amazon is the owner of the official AMIs. 
+                        // If I create the AMI, then I have to specify my AWS account ID.
+
+    filter {
+      name = "name"
+      values = ["suse-sle-micro-6-1-byos-v20250210-hvm-ssd-x86_64" ]  // here we have to specify the AMI name. We can find it in the EC2 dashboard under AMIs.
+    }
+}
+
+// automatically fetch the latest AMI ID based on the filter criteria.

@@ -1,0 +1,15 @@
+resource "aws_instance" "VMs" {
+  ami           = "ami-0a7d80731ae1b2435"
+  instance_type = var.instance_size["us"]
+  key_name      = "gladveen"
+
+  tags = local.tags
+}
+
+locals {
+  tags = {
+    owner        = "Surendhar"
+    Environment  = "dev"
+    creationdate = formatdate("DD MMM YYYY hh:mm", timestamp())
+  }
+}

@@ -1,0 +1,18 @@
+resource "aws_instance" "VMs" {
+  ami           = "ami-0a7d80731ae1b2435"
+  instance_type = var.env == "dev" && var.key_name == "gladveen" ? "t2.medium" : "m5.large"  // conditional expression
+  key_name = var.key_name
+}
+
+
+variable "env" {
+    default = "dev"
+}
+
+variable "key_name" {
+    default = "gladveen"
+}
+
+
+// syntax 
+// condition ? true_val : false_val

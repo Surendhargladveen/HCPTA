@@ -1,0 +1,12 @@
+resource "aws_instance" "sample" {
+    ami           = "ami-0a7d80731ae1b2435"
+    instance_type = "t2.micro"
+    key_name      = "gladveen"
+    count = 3
+}
+
+output "status" {
+  value = aws_instance.sample[*].public_ip
+}
+
+// If we pass [*] it will return a list of all public IPs of the instances created.

@@ -1,0 +1,30 @@
+resource "aws_instance" "vm" {
+    ami           = data.aws_ami.os.id
+    instance_type = "t2.micro"
+    key_name = "gladveen"
+    count = 2
+    
+    tags = {
+        Name = var.ec2-name[count.index]
+    }
+}
+
+data "aws_ami" "os" {
+    most_recent = true
+    owners = ["amazon"]
+
+    filter {
+        name = "name"
+        values = ["amzn2-ami-hvm-*-x86_64-gp2"]
+    }
+
+}
+
+output "Public-IP" {
+    value = aws_instance.vm[*].public_ip
+}
+
+variable "ec2-name" {
+    type = list(string)
+    default = ["vm1", "vm2", "vm3", "vm4", "vm5"]
+}
