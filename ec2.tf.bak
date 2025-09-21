@@ -1,0 +1,30 @@
+resource "aws_instance" "VMs" {
+  ami           = "ami-0a7d80731ae1b2435"
+  instance_type = var.instance_size["us"]
+  key_name      = "gladveen"
+//  user_data = file("./ec2-userdata")
+
+  tags = {
+    Name = "Surendhar"
+  }
+}
+
+# output "web" {
+#   value = "http://${aws_instance.VMs.public_ip}:80"
+# }
+
+
+# resource "aws_eip" "my_lb" {
+#   instance = aws_instance.VMs.id
+#   domain   = "vpc"
+# }
+
+# output "public_dns" {
+#   value = aws_instance.VMs.public_dns
+# }
+
+# output "private_dns" {
+#   value = aws_instance.VMs.private_dns
+# }
+
+
