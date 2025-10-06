@@ -6,7 +6,7 @@ resource "aws_instance" "remote" {
   connection {
     type        = "ssh" // here we have to mention the connection type SSH or WinRM.
     user        = "ubuntu"
-    private_key = file("~/Downloads/gladveen.pem") // Key path.
+    private_key = file("~/PATH/gladveen.pem") // Key path.
     host        = self.public_ip
   } // We should use connection first to connect with the instance, afterwards only we can use remote-exec.
 
