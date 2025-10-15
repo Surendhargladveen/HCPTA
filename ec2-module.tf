@@ -3,4 +3,4 @@ module "ec2" {
   version = "2.0.7"
 }
 
-// we need to terraform init to download plugin and module configuration.
+// we need to run terraform init to download plugin and module configuration.
