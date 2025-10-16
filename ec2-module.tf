@@ -1,6 +1,6 @@
 module "ec2" {
-  source  = "boldlink/ec2/aws"
-  version = "2.0.7"
+  source  = "boldlink/ec2/aws"   // mandatory
+  version = "2.0.7"  // optional - if not provided latest version will be used
 }
 
 // we need to run terraform init to download plugin and module configuration.
