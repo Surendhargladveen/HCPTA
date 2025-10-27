@@ -12,7 +12,7 @@ resource "aws_instance" "VMs" {
   provider      = aws.USA
   ami           = "ami-0a7d80731ae1b2435"
   instance_type = "t2.medium"
-  key_name      = "gladveen"
+  key_name      = var.key
 
   tags = {
     Name = "Surendhar"
@@ -25,3 +25,12 @@ resource "aws_s3_bucket" "bucket" {
 }
 
 // Using alias we can pass multiple providers, multiple regions and mulitple accounts in a single configuration file.
+
+
+variable "key" {
+  type = string
+  default = "gladveen"
+  sensitive = true
+}
+
+// sensitive parameter - this will hide the value in the terraform plan and apply output. Useful for passwords and secret keys.
